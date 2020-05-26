@@ -1,0 +1,22 @@
+// Change Place Order button text for wine
+add_filter( 'woocommerce_order_button_text', 'fleece_custom_button_text_for_wine' );
+
+function fleece_custom_button_text_for_wine() {
+ 
+$cat_in_cart = false;
+      
+foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+ 
+    if ( has_term( 'wine', 'product_cat', $cart_item['product_id'] ) ) {
+        $cat_in_cart = true;
+        break;
+    }
+}
+   
+// Change text if wine is in the Cart      
+if ( $cat_in_cart ) {
+	return 'Verify Age & Place Order';
+} else {
+	return 'Place Order';
+}
+}
